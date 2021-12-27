@@ -17,7 +17,7 @@ class select_which_tiendas:
         for i in range(0, len(self.new_tiendas_select)):
             pos_y += 30
             self.cb[i] = wx.CheckBox(panel, label=self.new_tiendas_select[i], pos=(20, pos_y))
-            self.cb[i].SetValue(True)        
+            self.cb[i].SetValue(False)        
 
         hbox_b = wx.BoxSizer(wx.HORIZONTAL)
         okButton = wx.Button(self.stnq_dialog, id=wx.ID_OK ,label='Aceptar')

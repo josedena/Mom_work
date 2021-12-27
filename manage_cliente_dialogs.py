@@ -139,7 +139,12 @@ class new_client_dialog:
 
             self.new_cliente = [str(tienda).upper(), distribuidor.upper(), cliente.upper(), str(folio).upper(), str(compra_total).upper(), str(qinicial).upper(), str(qfinal).upper(), str(minimo).upper(), str(fechac).upper(), str(fechap).upper(), str(comision).upper()]
             if option == 0:
-                db.insertar_cliente(self.fecha_, self.new_cliente)
+                comisiones = db.fetch_all_comisiones()
+                if str(tienda).upper() in comisiones:
+                    db.insertar_cliente(self.fecha_, self.new_cliente)
+                else:
+                    db.insertar_tienda_comision(str(tienda).upper(), 10)
+                    db.insertar_cliente(self.fecha_, self.new_cliente)
             if option == 1:
                 db.editar_cliente(self.fecha_, self.new_cliente, cliente_no)
             if option == 2:            

@@ -166,10 +166,7 @@ class Tabla:
                         self.myGrid.SetCellValue(row, col, '$ '+ str(data[row][col+1])) 
                         self.myGrid.SetReadOnly(row, col, False) 
                     if col == 7:
-                        if data[row][1] == 'MODERNA' and data[row][6] == 1: 
-                            self.myGrid.SetCellValue(row, col, '$! '+ str(data[row][col+1]+28))
-                        else:
-                            self.myGrid.SetCellValue(row, col, '$ '+ str(data[row][col+1]))
+                        self.myGrid.SetCellValue(row, col, '$ '+ str(data[row][col+1]))
                         self.myGrid.SetReadOnly(row, col, False)
                     else:
                         if col == 8 or col == 9:

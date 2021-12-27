@@ -14,6 +14,7 @@ class relaciones_distribuidores(wx.Panel):
         self.main_window = main_window
         self.SetBackgroundColour('green')
         self.fechas = db.fetch_all_tables() 
+        self.fechas.sort(reverse=True, key=lambda date: datetime.datetime.strptime(date, '%d_%b_%Y'))
         self.all_clientes = db.fetch_data_clientes(self.fechas[0])
         self.distribuidores = np.unique(self.all_clientes[:,2])
         self.clientes_distr = self.all_clientes[np.where(self.all_clientes[:,2] == self.distribuidores[0])]
@@ -99,6 +100,7 @@ class relaciones_distribuidores(wx.Panel):
     ############################### CALLBACK FUNCTIONS #######################################
     def update_all(self):
         self.fechas = db.fetch_all_tables() 
+        self.fechas.sort(reverse=True, key=lambda date: datetime.datetime.strptime(date, '%d_%b_%Y'))
         self.cb_fechas.Clear()
         for fecha in self.fechas:
             self.cb_fechas.Append(fecha)

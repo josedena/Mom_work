@@ -13,6 +13,7 @@ class relaciones_tiendas(wx.Panel):
         self.main_window = main_window
         self.SetBackgroundColour('blue')
         self.fechas = db.fetch_all_tables() 
+        self.fechas.sort(reverse=True, key=lambda date: datetime.datetime.strptime(date, '%d_%b_%Y'))
         self.clientes = db.fetch_data_clientes(self.fechas[0])
         self.tiendas = np.unique(self.clientes[:,1])#db.fetch_all_tiendas_from_table(self.fechas[0])
         self.mis_comisiones = db.fetch_all_comisiones()
@@ -64,7 +65,7 @@ class relaciones_tiendas(wx.Panel):
 
         vbox2 = wx.BoxSizer(wx.VERTICAL)
         vbox2.Add(st_tiendas, 0, wx.ALIGN_CENTER|wx.TOP, 10)
-        vbox2.Add(self.cb_tiendas, 0, wx.ALIGN_CENTER | wx.ALL, 10)
+        vbox2.Add(self.cb_tiendas, 0, wx.ALIGN_CENTER | wx.ALL, 15)
 
         vbox3 = wx.BoxSizer(wx.VERTICAL)
         vbox3.Add(st_new_quinc, 1, wx.ALIGN_CENTER|wx.TOP, 10)
@@ -219,6 +220,7 @@ class relaciones_tiendas(wx.Panel):
 
     def update_all(self):
         self.fechas = db.fetch_all_tables() 
+        self.fechas.sort(reverse=True, key=lambda date: datetime.datetime.strptime(date, '%d_%b_%Y'))
         self.cb_fechas.Clear()
         for fecha in self.fechas:
             self.cb_fechas.Append(fecha)
@@ -304,6 +306,7 @@ class relaciones_tiendas(wx.Panel):
                     self.clientes = db.new_table_quinc(last_date, new_date, win.new_tiendas_select)
                     
                     self.fechas = db.fetch_all_tables() 
+                    self.fechas.sort(reverse=True, key=lambda date: datetime.datetime.strptime(date, '%d_%b_%Y'))
                     self.cb_fechas.Clear()
                     for fecha in self.fechas:
                         self.cb_fechas.Append(fecha)
